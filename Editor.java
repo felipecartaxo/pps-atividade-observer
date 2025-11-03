@@ -4,7 +4,8 @@ import java.io.File;
 
 public class Editor {
 
-    public EventManager events;
+    //A classe Editor agora encapsula EventManager (private)
+    private EventManager events;
     private File file;
 
     public Editor() {
@@ -22,6 +23,15 @@ public class Editor {
         } else {
             throw new Exception("Please open a file first.");
         }
+    }
+
+    // E oferece métodos subscribe/unsubscribe diretamente
+    public void subscribe(String eventType, EventListener listener) {
+        events.subscribe(eventType, listener);
+    }
+
+    public void unsubscribe(String eventType, EventListener listener) {
+        events.unsubscribe(eventType, listener);
     }
 
 }
