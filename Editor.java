@@ -10,7 +10,7 @@ public class Editor {
 
     private File file;
 
-    //A lista de observer agora está em Editor
+    //A lista de observers agora está em Editor
     private Map<String, List<EventListener>> listeners = new HashMap<>();
 
     public Editor() {
@@ -19,6 +19,7 @@ public class Editor {
         this.listeners.put("save", new ArrayList<>());
     }
 
+    //Adiciona ou remove subscribers
     public void subscribe(String eventType, EventListener listener) {
         List<EventListener> users = listeners.get(eventType);
         users.add(listener);
@@ -29,6 +30,7 @@ public class Editor {
         users.remove(listener);
     }
 
+    //Notifica os subscribers sobre um evento
     public void notify(String eventType, File file) {
         List<EventListener> users = listeners.get(eventType);
         for (EventListener listener : users) {
@@ -36,6 +38,7 @@ public class Editor {
         }
     }
 
+    //Operações do editor de texto
     public void openFile(String filePath) {
         this.file = new File(filePath);
         notify("open", file);
